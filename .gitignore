@@ -3,3 +3,4 @@ node_modules/
 *.log
 .vscode/
 triple-kingdom-416610-cae26f77de65.json
+.terraform/
