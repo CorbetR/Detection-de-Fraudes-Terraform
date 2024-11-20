@@ -4,3 +4,4 @@ node_modules/
 .vscode/
 triple-kingdom-416610-cae26f77de65.json
 .terraform/
+Detection-de-fraudes-Terraform/.terraform
