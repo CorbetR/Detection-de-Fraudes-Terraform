@@ -18,6 +18,7 @@ resource "google_bigquery_table" "train_table" {
   dataset_id = google_bigquery_dataset.train_dataset.dataset_id
   table_id   = "fraud_transactions"
   project    = google_bigquery_dataset.train_dataset.project
+  deletion_protection = false
 
   schema = jsonencode([
     {
