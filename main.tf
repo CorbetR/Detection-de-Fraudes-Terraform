@@ -1,45 +1,29 @@
 provider "google" {
-  # Chemin vers les credentials JSON (utilise une variable d’environnement si possible)
-  credentials = file("triple-kingdom-416610-cae26f77de65.json")
-  project     = "triple-kingdom-416610" # Change avec ton ID projet
-  region      = "europe-west1" # Région BigQuery
+  project = "retailfrauddetectionai"  # Replace with your GCP project ID
+  region  = "europe-west1"           # Replace with your preferred region
 }
 
-# Création d'un dataset BigQuery
-resource "google_bigquery_dataset" "train_dataset" {
-  dataset_id    = "train_dataset"
-  location      = "europe-west1"
-  friendly_name = "Training Dataset"
-  description   = "Dataset for training purposes."
-}
+resource "google_storage_bucket" "data_bucket" {
+  name          = "${var.project_id}-daily-data-bucket"  # Globally unique bucket name
+  location      = "europe-west1"                        # Matches the provider's region
+  force_destroy = true                                  # Set to true to delete non-empty buckets
 
-# Création d'une table BigQuery dans le dataset
-resource "google_bigquery_table" "train_table" {
-  dataset_id = google_bigquery_dataset.train_dataset.dataset_id
-  table_id   = "fraud_transactions"
-  project    = google_bigquery_dataset.train_dataset.project
-  deletion_protection = false
-
-  schema = jsonencode([
-    {
-      "name" : "transaction_id",
-      "type" : "STRING",
-      "mode" : "REQUIRED"
-    },
-    {
-      "name" : "amount",
-      "type" : "FLOAT",
-      "mode" : "NULLABLE"
-    },
-    {
-      "name" : "timestamp",
-      "type" : "TIMESTAMP",
-      "mode" : "NULLABLE"
-    },
-    {
-      "name" : "is_fraud",
-      "type" : "BOOLEAN",
-      "mode" : "NULLABLE"
+  lifecycle_rule {
+    condition {
+      age = 30                                           # Retain objects for 30 days
     }
-  ])
+    action {
+      type = "Delete"
+    }
+  }
+
+  labels = {
+    environment = "dev"
+    team        = "data-engineering"
+  }
+}
+
+variable "project_id" {
+  default = "retailfrauddetectionai"  
+  description = "The GCP project ID"
 }
