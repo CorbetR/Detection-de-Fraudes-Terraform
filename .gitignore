@@ -4,5 +4,5 @@ node_modules/
 .vscode/
 .terraform/
 Detection-de-fraudes-Terraform/.terraform
-terraform.tfsate
-terraform.tfsate.backup
+Detection-de-fraudes-Terraform/terraform.tfsate
+Detection-de-fraudes-Terraform/terraform.tfsate.backup
