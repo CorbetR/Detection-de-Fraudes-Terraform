@@ -6,3 +6,5 @@ node_modules/
 Detection-de-fraudes-Terraform/.terraform
 Detection-de-fraudes-Terraform/terraform.tfsate
 Detection-de-fraudes-Terraform/terraform.tfsate.backup
+.terraform.lock.hcl
+.idea
