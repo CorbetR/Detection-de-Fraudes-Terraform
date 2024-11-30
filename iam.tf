@@ -9,3 +9,10 @@ resource "google_project_iam_member" "github-actions-project-owner" {
   role    = "roles/owner"
   member  = "serviceAccount:${google_service_account.github_action_deploy.email}"
 }
+
+resource "google_pubsub_topic_iam_member" "gcs_topic_publisher" {
+  topic  = google_pubsub_topic.gcs_topic.id
+  role   = "roles/pubsub.publisher"
+  member = "serviceAccount:service-497650107059@gs-project-accounts.iam.gserviceaccount.com"
+}
+

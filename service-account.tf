@@ -6,6 +6,4 @@ resource "google_service_account" "github_action_deploy" {
 }
 
 
-# output "cloud_run_service_account_email" {
-#   value = google_service_account.cloud_run_service_account.email
-# }
+
