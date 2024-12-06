@@ -16,3 +16,14 @@ resource "google_pubsub_topic_iam_member" "gcs_topic_publisher" {
   member = "serviceAccount:service-497650107059@gs-project-accounts.iam.gserviceaccount.com"
 }
 
+resource "google_project_iam_member" "github-actions-artifact-registry-admin" {
+  project = local.project_id
+  role    = "roles/artifactregistry.admin"
+  member  = "serviceAccount:${google_service_account.github_action_deploy.email}"
+}
+
+resource "google_project_iam_member" "github-actions-cloud-run-admin" {
+  project = local.project_id
+  role    = "roles/run.admin"
+  member  = "serviceAccount:${google_service_account.github_action_deploy.email}"
+}
