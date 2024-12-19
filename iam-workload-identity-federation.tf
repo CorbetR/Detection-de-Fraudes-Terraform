@@ -7,12 +7,12 @@ resource "google_iam_workload_identity_pool_provider" "github-actions-provider" 
   workload_identity_pool_id          = google_iam_workload_identity_pool.github-actions-pool.workload_identity_pool_id
   workload_identity_pool_provider_id = "github-actions-provider"
   attribute_mapping                  = {
-    "google.subject"       = "assertion.sub"
+    "google.subject"       = "assertion.repository_owner"
   }
   attribute_condition = <<EOT
-    attribute.repository == "Luap989/Detection-de-fraudes"
+    assertion.repository_owner=='Luap989'
 EOT
   oidc {
-    issuer_uri        = "https://token.actions.githubusercontent.com/"
+    issuer_uri        = "https://token.actions.githubusercontent.com"
   }
 }
