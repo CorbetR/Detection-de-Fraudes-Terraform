@@ -36,14 +36,14 @@ jobs:
       # Étape 5 : Initialisation de Terraform
       - name: Terraform Init
         run: terraform init
-        working-directory: ./terraform # Changez le chemin si nécessaire
+        working-directory: .
 
       # Étape 6 : Terraform Plan
       - name: Terraform Plan
         run: terraform plan -out=tfplan
-        working-directory: ./terraform
+        working-directory: .
 
       # Étape 7 : Terraform Apply
       - name: Terraform Apply
         run: terraform apply -auto-approve tfplan
-        working-directory: ./terraform
+        working-directory: .
