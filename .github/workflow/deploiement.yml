@@ -1,0 +1,49 @@
+name: Deploy Infrastructure with Terraform
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      # Étape 1 : Récupération du dépôt GitHub
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Étape 2 : Configuration de Terraform
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.5 # Remplacez par la version appropriée
+
+      # Étape 3 : Authentification à Google Cloud via Workload Identity Federation
+      - id: auth
+        uses: google-github-actions/auth@v1
+        with:
+          workload_identity_provider: 'projects/497650107059/locations/global/workloadIdentityPools/github-actions-pool/providers/github-actions-provider'
+          service_account: 'github-action-deploy@retailfrauddetectionai.iam.gserviceaccount.com'
+
+      # Étape 4 : Configuration du projet Google Cloud
+      - name: Configure Google Cloud project
+        run: gcloud config set project retailfrauddetectionai
+
+      # Étape 5 : Initialisation de Terraform
+      - name: Terraform Init
+        run: terraform init
+        working-directory: ./terraform # Changez le chemin si nécessaire
+
+      # Étape 6 : Terraform Plan
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan
+        working-directory: ./terraform
+
+      # Étape 7 : Terraform Apply
+      - name: Terraform Apply
+        run: terraform apply -auto-approve tfplan
+        working-directory: ./terraform
