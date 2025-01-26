@@ -27,8 +27,15 @@ resource "google_project_iam_member" "github-actions-cloud-run-admin" {
   role    = "roles/run.admin"
   member  = "serviceAccount:${google_service_account.github_action_deploy.email}"
 }
+
 resource "google_project_iam_member" "github-actions-storage-object-viewer" {
   project = local.project_id
   role    = "roles/storage.objectViewer"
+  member  = "serviceAccount:${google_service_account.github_action_deploy.email}"
+}
+
+resource "google_project_iam_member" "github-actions-bq-editor" {
+  project = local.project_id
+  role    = "roles/bigquery.dataEditor"
   member  = "serviceAccount:${google_service_account.github_action_deploy.email}"
 }
