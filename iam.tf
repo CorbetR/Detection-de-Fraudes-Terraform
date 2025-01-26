@@ -45,3 +45,4 @@ resource "google_project_iam_member" "github-actions-token-creator" {
   role    = "roles/iam.serviceAccountTokenCreator"
   member  = "serviceAccount:github-action-deploy@retailfrauddetectionai.iam.gserviceaccount.com"
 }
+
