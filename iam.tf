@@ -39,3 +39,9 @@ resource "google_project_iam_member" "github-actions-bq-editor" {
   role    = "roles/bigquery.dataEditor"
   member  = "serviceAccount:${google_service_account.github_action_deploy.email}"
 }
+
+resource "google_project_iam_member" "github-actions-token-creator" {
+  project = "retailfrauddetectionai"
+  role    = "roles/iam.serviceAccountTokenCreator"
+  member  = "serviceAccount:github-action-deploy@retailfrauddetectionai.iam.gserviceaccount.com"
+}
