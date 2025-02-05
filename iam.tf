@@ -52,3 +52,6 @@ resource "google_project_iam_member" "github-actions-token-creator" {
   member  = "serviceAccount:github-action-deploy@retailfrauddetectionai.iam.gserviceaccount.com"
 }
 
+resource "google_pubsub_topic" "gcs_topic" {
+  name = "gcs-event-topic"
+}
