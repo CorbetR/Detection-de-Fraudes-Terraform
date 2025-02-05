@@ -4,7 +4,7 @@ resource "google_pubsub_subscription" "push_subscription" {
 
   # Configuration pour envoyer les messages à Cloud Run
   push_config {
-    push_endpoint = "https://cloud-run-test-497650107059.us-central1.run.app" 
+    push_endpoint = "https://mon-application-497650107059.us-central1.run.app" 
 
     # Authentification via un Service Account
     oidc_token {
