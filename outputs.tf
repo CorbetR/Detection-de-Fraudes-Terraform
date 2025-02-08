@@ -5,3 +5,7 @@ output "cloud_run_endpoint" {
 output "cloud_run_service_account_email" {
   value = google_service_account.github_action_deploy.email
 }
+
+output "bucket_name" {
+  value = google_storage_bucket.data_bucket.name
+}

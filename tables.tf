@@ -8,7 +8,7 @@ resource "google_bigquery_table" "daily_partitioned_table" {
   {
     "name": "client_id",
     "type": "STRING",
-    "mode": "REQUIRED"
+    "mode": "NULLABLE"
   },
   {
     "name": "transaction_id",
