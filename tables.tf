@@ -13,22 +13,22 @@ resource "google_bigquery_table" "daily_partitioned_table" {
   {
     "name": "transaction_id",
     "type": "STRING",
-    "mode": "REQUIRED"
+    "mode": "NULLABLE"
   },
   {
     "name": "purchase_date",
     "type": "DATE",
-    "mode": "REQUIRED"
+    "mode": "NULLABLE"
   },
   {
     "name": "paid_with_credit_card",
     "type": "BOOLEAN",
-    "mode": "REQUIRED"
+    "mode": "NULLABLE"
   },
   {
     "name": "paid_with_gift_card",
     "type": "BOOLEAN",
-    "mode": "REQUIRED"
+    "mode": "NULLABLE"
   },
   {
     "name": "gift_card_purchase_date",
@@ -38,7 +38,7 @@ resource "google_bigquery_table" "daily_partitioned_table" {
   {
     "name": "nb_gift_card_used",
     "type": "INTEGER",
-    "mode": "REQUIRED"
+    "mode": "NULLABLE"
   }
 ]
 EOF
